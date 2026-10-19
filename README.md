@@ -1,6 +1,6 @@
 # Tiny Terrarium · Wordless Greenhouse
 
-A playable, entirely visual greenhouse workbench. No visible instructions, menus, captions, numbers, font downloads or external assets. Semantic names and a hidden status region support screen readers.
+A desktop greenhouse game with a visual workbench and written seven-day results. The play scene has no visible instructions or captions. Semantic names and a hidden status region support screen readers. All graphics and fonts work without external downloads.
 
 ## Versions
 
@@ -19,10 +19,12 @@ Or run `node scripts/build-standalone.mjs` and open the generated HTML file dire
 1. Pick a soil tray (the pointer carries a loaded trowel), then choose the jar. The separate trowel highlights the soil choices.
 2. Pick a potted plant from the cabinet. Three glowing positions appear inside the jar. Fill or replace any position.
 3. Pick either insect box and place its inhabitants in the jar. Repeat to remove that species. Creatures are optional.
-4. Pick the sprayer and choose the jar to add water. Choose any of the three overhead lamps for low, medium or bright light.
+4. Pick the sprayer and choose the jar to add water. Rotate the dial beside it to control the single pendant lamp continuously from 0 to 100. The lamp and light cone update immediately.
 5. Use the sun control to advance one day, or the play/pause control for automatic time. Seven seeds fill as days pass. The first seven days end in a visual record; continue to keep caring.
 
-Desktop supports click-to-pick/click-to-place and pointer dragging. Touch supports tap-to-pick/tap-to-place; scrolling stays available. Keyboard: Tab through objects, Enter/Space to select/place, Escape to put down a tool, Ctrl/Cmd+Z to undo. The top controls undo an action or start again after a visual confirmation. Time pauses when choosing a tool, changing light, opening a dialog, or hiding the tab. Reloading starts a new world.
+The landscape workbench scales to the desktop browser window as a single scene, keeping every object visible. Mouse controls support click-to-pick/click-to-place and dragging. Drag around the brightness dial, use the mouse wheel over it, or focus it and press arrow keys (1), Page Up/Down (10), Home (0) or End (100). A complete drag is one undo action. Tab through objects, Enter/Space to select/place, Escape to put down a tool and Ctrl/Cmd+Z to undo. Time pauses during light adjustment and when selecting tools, opening a dialog or hiding the tab. Reloading starts a new world.
+
+After seven days, the result page shows the terrarium, seven daily symbols, a written assessment, average plant health, current health/moisture/light, watering count and context-specific care advice. Continue growing returns to the same world.
 
 Plant health, posture, size, condensation, soil darkness and crawling creatures respond to the existing deterministic ecological model. The game is a simplified learning toy.
 
@@ -32,7 +34,8 @@ Plant health, posture, size, condensation, soil darkness and crawling creatures 
 - `dist/game-model.js`: game actions and prerequisites.
 - `dist/model.js`: original deterministic ecological rules.
 - `dist/game-art.js`: editable SVG object and scene generators.
-- `dist/game.css`: room, furniture, responsive layout and reduced motion.
+- `dist/game.css`: base room, furniture and animations.
+- `dist/desktop.css`: desktop composition, rotary control, result page and reduced motion.
 - `ASSETS.md`: complete Chinese asset inventory.
 - `dist/assets/game/`: 52 standalone SVG exports, a manifest and a gallery.
 

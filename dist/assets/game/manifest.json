@@ -1,7 +1,7 @@
 {
-  "version": "wordless-v1",
+  "version": "desktop-dimmer-v2",
   "count": 52,
-  "source": "dist/game-art.js and dist/game.css",
+  "source": "dist/game-art.js, dist/game.css and dist/desktop.css",
   "assets": [
     {
       "file": "potted-moss.svg",
@@ -100,28 +100,28 @@
       "category": "喷水壶"
     },
     {
-      "file": "lamp-low-off.svg",
-      "category": "顶灯"
+      "file": "pendant-0.svg",
+      "category": "单盏顶灯亮度状态"
     },
     {
-      "file": "lamp-low-on.svg",
-      "category": "顶灯"
+      "file": "dimmer-0.svg",
+      "category": "亮度旋钮状态"
     },
     {
-      "file": "lamp-medium-off.svg",
-      "category": "顶灯"
+      "file": "pendant-50.svg",
+      "category": "单盏顶灯亮度状态"
     },
     {
-      "file": "lamp-medium-on.svg",
-      "category": "顶灯"
+      "file": "dimmer-50.svg",
+      "category": "亮度旋钮状态"
     },
     {
-      "file": "lamp-bright-off.svg",
-      "category": "顶灯"
+      "file": "pendant-100.svg",
+      "category": "单盏顶灯亮度状态"
     },
     {
-      "file": "lamp-bright-on.svg",
-      "category": "顶灯"
+      "file": "dimmer-100.svg",
+      "category": "亮度旋钮状态"
     },
     {
       "file": "symbol-undo.svg",
