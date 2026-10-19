@@ -8,7 +8,7 @@ const names={soil:SOILS,plant:SPECIES,creature:CREATURES};
 const announcement=q('#announcement');
 const say=message=>{announcement.textContent=message;};
 const copy=s=>JSON.parse(JSON.stringify(s));
-q('#seal').innerHTML=glyph('leaf');q('#undo').innerHTML=glyph('undo');q('#reset').innerHTML=glyph('reset');q('#day').innerHTML=glyph('sun');q('#cancel-reset').innerHTML=glyph('close');q('#confirm-reset').innerHTML=glyph('check');q('#continue-icon').innerHTML=glyph('next');
+q('#seal').innerHTML=glyph('leaf');q('#undo').innerHTML=glyph('undo');q('#reset').innerHTML=glyph('reset');q('#day-icon').innerHTML=glyph('sun');q('#cancel-reset').innerHTML=glyph('close');q('#confirm-reset').innerHTML=glyph('check');q('#continue-icon').innerHTML=glyph('next');
 q('#trowel').innerHTML=trowel();q('#sprayer').innerHTML=sprayer();
 q('#plant-shelf').innerHTML=Object.entries(SPECIES).map(([type,p])=>`<div class="plant-row"><button class="plant-choice object-button" data-kind="plant" data-type="${type}" aria-label="Pick up ${p.name}" aria-pressed="false">${pottedPlant(type)}</button></div>`).join('');
 q('#soils').innerHTML=Object.entries(SOILS).map(([type,s])=>`<button class="soil-choice object-button" data-kind="soil" data-type="${type}" aria-label="Scoop ${s.name}" aria-pressed="false">${soilTray(type)}</button>`).join('');
@@ -59,7 +59,7 @@ function render(options={}){
  q('#sprayer').disabled=!world.soil;q('#sprayer').setAttribute('aria-pressed',String(selected?.kind==='water'));q('#sprayer').classList.toggle('suggest',ready(world)&&!world.gameWatered);
  q('#lamps').innerHTML=pendant(world.light);q('#light-dial').innerHTML=dimmer(world.light);q('#light-dial').setAttribute('aria-valuenow',String(world.light));q('#light-dial').setAttribute('aria-valuetext',`${world.light} percent`);
  q('#game').style.setProperty('--lamp',String(world.light/70));
- q('#undo').disabled=!undoStack.length;q('#day').disabled=!ready(world);q('#play').disabled=!ready(world);q('#play').innerHTML=glyph(playing?'pause':'play');q('#play').setAttribute('aria-label',playing?'Pause time':'Play time');q('#play').setAttribute('aria-pressed',String(playing));
+ q('#undo').disabled=!undoStack.length;q('#day').disabled=!ready(world);q('#play').disabled=!ready(world);q('#play-icon').innerHTML=glyph(playing?'pause':'play');q('#play-label').textContent=playing?'Pause':'Auto play';q('#play').setAttribute('aria-label',playing?'Pause time':'Play time');q('#play').setAttribute('aria-pressed',String(playing));q('#time-status').textContent=ready(world)?`Day ${world.day}${world.day<=7?' / 7':''} · ${playing?'Running':'Paused'}`:'Plant to begin';
  q('#time-dock').classList.toggle('ready',ready(world));
  q('#week-orbit').innerHTML=Array.from({length:7},(_,i)=>`<i class="day-seed ${i<world.day?'filled':''} ${i===(world.day-1)%7?'today':''}"></i>`).join('');
  q('#readings').style.opacity=world.soil?'1':'0';q('#readings').innerHTML=[['drop',world.moisture],['sun',world.light],['leaf',meanHealth(world)]].map(([g,value])=>`<span class="reading">${glyph(g)}<span class="beads">${Array.from({length:5},(_,i)=>`<i class="bead ${i<Math.ceil(value/20)?'on':''}"></i>`).join('')}</span></span>`).join('');

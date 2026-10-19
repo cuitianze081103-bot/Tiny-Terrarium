@@ -1,6 +1,6 @@
 # Tiny Terrarium · Wordless Greenhouse
 
-A desktop greenhouse game with a visual workbench and written seven-day results. The play scene has no visible instructions or captions. Semantic names and a hidden status region support screen readers. All graphics and fonts work without external downloads.
+A desktop greenhouse game with a visual workbench and written seven-day results. The play scene uses minimal text: Next day, Auto play/Pause, and a day/playback status beside the time controls. Semantic names and a hidden status region support screen readers. All graphics and fonts work without external downloads.
 
 ## Versions
 
