@@ -1,0 +1,215 @@
+{
+  "version": "wordless-v1",
+  "count": 52,
+  "source": "dist/game-art.js and dist/game.css",
+  "assets": [
+    {
+      "file": "potted-moss.svg",
+      "category": "柜中盆栽"
+    },
+    {
+      "file": "plant-moss-healthy.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "plant-moss-stressed.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "plant-moss-struggling.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "potted-fern.svg",
+      "category": "柜中盆栽"
+    },
+    {
+      "file": "plant-fern-healthy.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "plant-fern-stressed.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "plant-fern-struggling.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "potted-foliage.svg",
+      "category": "柜中盆栽"
+    },
+    {
+      "file": "plant-foliage-healthy.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "plant-foliage-stressed.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "plant-foliage-struggling.svg",
+      "category": "瓶内植物"
+    },
+    {
+      "file": "soil-tray-sandy.svg",
+      "category": "土壤盘"
+    },
+    {
+      "file": "trowel-sandy.svg",
+      "category": "铲子"
+    },
+    {
+      "file": "soil-tray-regular.svg",
+      "category": "土壤盘"
+    },
+    {
+      "file": "trowel-regular.svg",
+      "category": "铲子"
+    },
+    {
+      "file": "soil-tray-humus.svg",
+      "category": "土壤盘"
+    },
+    {
+      "file": "trowel-humus.svg",
+      "category": "铲子"
+    },
+    {
+      "file": "trowel-empty.svg",
+      "category": "铲子"
+    },
+    {
+      "file": "insect-box-springtails.svg",
+      "category": "昆虫盒"
+    },
+    {
+      "file": "insect-springtails.svg",
+      "category": "昆虫"
+    },
+    {
+      "file": "insect-box-woodlice.svg",
+      "category": "昆虫盒"
+    },
+    {
+      "file": "insect-woodlice.svg",
+      "category": "昆虫"
+    },
+    {
+      "file": "water-sprayer.svg",
+      "category": "喷水壶"
+    },
+    {
+      "file": "lamp-low-off.svg",
+      "category": "顶灯"
+    },
+    {
+      "file": "lamp-low-on.svg",
+      "category": "顶灯"
+    },
+    {
+      "file": "lamp-medium-off.svg",
+      "category": "顶灯"
+    },
+    {
+      "file": "lamp-medium-on.svg",
+      "category": "顶灯"
+    },
+    {
+      "file": "lamp-bright-off.svg",
+      "category": "顶灯"
+    },
+    {
+      "file": "lamp-bright-on.svg",
+      "category": "顶灯"
+    },
+    {
+      "file": "symbol-undo.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-reset.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-play.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-pause.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-next.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-check.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-close.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-drop.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-sun.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-hand.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "symbol-leaf.svg",
+      "category": "交互符号"
+    },
+    {
+      "file": "jar-empty.svg",
+      "category": "生态瓶场景"
+    },
+    {
+      "file": "jar-soil.svg",
+      "category": "生态瓶场景"
+    },
+    {
+      "file": "jar-planted.svg",
+      "category": "生态瓶场景"
+    },
+    {
+      "file": "jar-watering.svg",
+      "category": "生态瓶场景"
+    },
+    {
+      "file": "jar-week-complete.svg",
+      "category": "生态瓶场景"
+    },
+    {
+      "file": "jar-struggling.svg",
+      "category": "生态瓶场景"
+    },
+    {
+      "file": "furniture-plant-cabinet.svg",
+      "category": "家具参考"
+    },
+    {
+      "file": "furniture-insect-shelf.svg",
+      "category": "家具参考"
+    },
+    {
+      "file": "furniture-soil-tray.svg",
+      "category": "家具参考"
+    },
+    {
+      "file": "environment-window.svg",
+      "category": "环境参考"
+    },
+    {
+      "file": "environment-workbench.svg",
+      "category": "环境参考"
+    }
+  ]
+}
