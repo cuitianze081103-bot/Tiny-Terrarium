@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {freshState,advanceDay,water} from '../dist/model.js';
+const world=(soil='regular',species='fern')=>Object.assign(freshState(),{soil,started:true,plants:[{species,health:90,growth:.85,stressDays:0},null,null]});
+test('same setup and care produce identical days',()=>{const a=world(),b=world();for(let i=0;i<7;i++){advanceDay(a);advanceDay(b);}assert.deepEqual(a,b);assert.equal(a.history.length,7);});
+test('humus retains more moisture than regular, which retains more than sandy',()=>{const soils=['humus','regular','sandy'].map(soil=>world(soil));soils.forEach(advanceDay);assert.ok(soils[0].moisture>soils[1].moisture);assert.ok(soils[1].moisture>soils[2].moisture);});
+test('bright light increases evaporation',()=>{const a=world(),b=world();a.light=15;b.light=90;advanceDay(a);advanceDay(b);assert.ok(a.moisture>b.moisture);});
+test('prolonged dryness causes gradual decline; suitable conditions recover',()=>{const s=world();s.moisture=5;for(let i=0;i<4;i++)advanceDay(s);const damaged=s.plants[0].health;assert.ok(damaged<65);s.moisture=65;s.light=45;advanceDay(s);assert.equal(s.plants[0].health,damaged+5);assert.equal(s.plants[0].stressDays,0);});
+test('waterlogging and unsuitable light harm plants',()=>{const wet=world('humus','foliage');wet.moisture=100;advanceDay(wet);assert.ok(wet.plants[0].health<90);const dark=world();dark.light=0;advanceDay(dark);assert.ok(dark.plants[0].health<90);});
+test('species respond differently to the same environment',()=>{const moss=world('humus','moss'),foliage=world('humus','foliage');moss.moisture=foliage.moisture=80;moss.light=foliage.light=25;advanceDay(moss);advanceDay(foliage);assert.ok(moss.plants[0].health>foliage.plants[0].health);});
+test('creature condition falls in dry conditions and recovers in moist soil',()=>{const s=world();s.creatures=['springtails','woodlice'];s.moisture=5;advanceDay(s);const damaged=s.creatureHealth;assert.ok(damaged<90);s.moisture=65;advanceDay(s);assert.ok(s.creatureHealth>damaged);});
+test('watering is capped; simulation values remain bounded over 200 days',()=>{const s=world();s.moisture=99;assert.equal(water(s),1);assert.equal(water(s),0);for(let i=0;i<200;i++)advanceDay(s);assert.ok(s.moisture>=0);assert.ok(s.plants[0].health>=0);assert.ok(s.plants[0].growth>=.6);});
+test('unstarted or incomplete worlds cannot advance',()=>{const s=freshState();advanceDay(s);assert.equal(s.day,0);const t=world();t.plants=[null,null,null];advanceDay(t);assert.equal(t.day,0);});
