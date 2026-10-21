@@ -1,59 +1,39 @@
-// DOM integration QA, not a real-browser/layout test. No network requests.
-import {JSDOM} from 'jsdom';
+// Headless DOM journey. Real-browser screenshots are checked separately.
 import {readFile} from 'node:fs/promises';
-import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
 import path from 'node:path';
-const root=path.resolve('dist');
-const dom=new JSDOM(await readFile(path.join(root,'index.html'),'utf8'),{url:'https://terrarium.test/'});
-const {window}=dom;
-globalThis.document=window.document;
-globalThis.window=window;
-const timers=new Map();let timerId=0;
-globalThis.setInterval=(fn)=>{timers.set(++timerId,fn);return timerId;};
-globalThis.clearInterval=id=>timers.delete(id);
-globalThis.setTimeout=()=>++timerId;
-globalThis.clearTimeout=()=>{};
-window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};
-window.HTMLDialogElement.prototype.close=function(){if(this.open){this.open=false;this.dispatchEvent(new window.Event('close'));}};
-await import(pathToFileURL(path.join(root,'app.js')).href);
-const q=s=>document.querySelector(s);
-const click=s=>{assert.ok(q(s),`Missing ${s}`);assert.ok(!q(s).disabled,`Disabled ${s}`);q(s).click();};
-const text=s=>q(s).textContent;
-const slider=(s,value)=>{q(s).value=value;q(s).dispatchEvent(new window.Event('input',{bubbles:true}));q(s).dispatchEvent(new window.Event('change',{bubbles:true}));};
-const tick=()=>{[...timers.values()].forEach(fn=>fn());};
-const day=n=>assert.match(text('.step-label'),new RegExp('DAY '+String(n).padStart(2,'0')));
-assert.equal(q('#next').disabled,true);
-assert.equal(q('[data-step="1"]').disabled,true);
-for(const soil of ['sandy','regular','humus']){click(`[data-soil="${soil}"]`);click('#add-soil');assert.equal(q('#next').disabled,false);}
-click('#next');assert.equal(q('#next').disabled,true);
-click('[data-plant="moss"]');click('[data-slot="0"]');
-click('[data-plant="fern"]');click('[data-slot="1"]');
-click('[data-plant="foliage"]');click('[data-slot="2"]');
-assert.equal(document.querySelectorAll('[data-remove]').length,3);
-click('[data-plant="fern"]');click('[data-slot="2"]');
-assert.match(q('[data-remove="2"]').getAttribute('aria-label'),/Fern/);
-click('[data-remove="0"]');click('[data-remove="1"]');click('[data-remove="2"]');assert.equal(q('#next').disabled,true);
-click('[data-plant="moss"]');click('[data-slot="0"]');click('[data-plant="fern"]');click('[data-slot="1"]');
-click('#back');assert.equal(q('[data-soil="humus"]').getAttribute('aria-pressed'),'true');click('#next');assert.equal(document.querySelectorAll('[data-remove]').length,2);
-click('#next');assert.equal(q('#next').disabled,true);click('[data-creature="springtails"]');click('[data-creature="woodlice"]');assert.equal(q('#next').disabled,false);
-click('[data-creature="springtails"]');click('[data-creature="woodlice"]');assert.equal(q('#next').disabled,true);click('#skip');assert.equal(q('#next').disabled,false);
-click('[data-creature="springtails"]');click('[data-creature="woodlice"]');click('#next');
-slider('#watering',72);slider('#light',45);assert.match(text('#watering-value'),/72%/);assert.match(text('#light-value'),/45%/);assert.match(text('#scene-readings'),/72%/);
-click('#back');assert.equal(q('[data-creature="springtails"]').getAttribute('aria-pressed'),'true');click('#next');assert.equal(q('#watering').value,'72');
-click('#next');day(0);assert.equal(timers.size,0);assert.match(text('.pause-indicator'),/Paused/);
-q('#advance').focus();click('#advance');day(1);assert.equal(document.activeElement.id,'advance');
-click('#water');assert.match(text('.feedback'),/Added/);slider('#care-light',50);assert.match(text('#scene-readings'),/Moderate/);
-click('#play');assert.equal(timers.size,1);tick();day(2);click('#play');assert.equal(timers.size,0);tick();day(2);
-click('#play');click('[data-step="1"]');assert.equal(timers.size,0);assert.equal(document.querySelectorAll('[data-remove]').length,2);click('[data-step="4"]');day(2);
-click('#play');click('#guide-button');assert.equal(q('#guide').open,true);assert.equal(timers.size,0);click('[data-close="guide"]');
-for(let i=3;i<=7;i++)click('#advance');day(7);assert.equal(q('#summary').open,true);assert.equal(timers.size,0);assert.match(text('#summary'),/Moss \+ Fern/);assert.match(text('#summary'),/1 watering actions/);assert.match(text('#summary'),/1 light changes/);
-click('#continue');assert.equal(q('#summary').open,false);assert.equal(timers.size,0);click('#advance');day(8);assert.equal(q('#summary').open,false);
-click('#view-summary');assert.equal(q('#summary').open,true);click('#continue');
-click('#reset');assert.equal(q('#reset-dialog').open,true);click('[data-close="reset-dialog"]');day(8);
-click('#reset');click('#confirm-reset');assert.match(text('#step-heading'),/earth/);assert.equal(q('#next').disabled,true);assert.equal(q('[data-step="4"]').disabled,true);assert.equal(timers.size,0);
-click('#add-soil');click('#next');click('[data-slot="0"]');click('#next');click('#skip');click('#next');click('#next');day(0);assert.match(text('.journal'),/0 days/);
-// Automatic playback stops exactly on the first seven-day summary.
-click('#play');for(let i=0;i<7;i++)tick();day(7);assert.equal(timers.size,0);assert.equal(q('#summary').open,true);
-console.log('PASS: complete setup, all soils, three plant positions, replace/remove, gating, earlier-step preservation, both creatures and skip, sliders, care, deterministic days, playback/pause, guide pause, day-seven summary, continue, day eight, reset cancel/confirm, fresh restart, automatic seven-day stop, and control focus retention.');
-
+import assert from 'node:assert/strict';
+const {JSDOM}=await import(process.env.JSDOM_MODULE||'jsdom');
+const dom=new JSDOM(await readFile('dist/index.html','utf8'),{url:'https://terrarium.test/'});
+globalThis.window=dom.window;globalThis.document=dom.window.document;
+globalThis.requestAnimationFrame=()=>0;
+const intervals=new Map();let serial=0;
+globalThis.setInterval=fn=>{intervals.set(++serial,fn);return serial;};globalThis.clearInterval=id=>intervals.delete(id);
+globalThis.setTimeout=()=>++serial;globalThis.clearTimeout=()=>{};
+window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};window.HTMLDialogElement.prototype.close=function(){this.open=false;};
+await import(pathToFileURL(path.resolve('dist/game.js')).href);
+const q=s=>document.querySelector(s),click=s=>{assert.ok(q(s),s);assert.ok(!q(s).disabled,`Disabled: ${s}`);q(s).click();};
+const place=()=>click('.jar-target'),choose=(kind,type)=>click(`[data-kind="${kind}"][data-type="${type}"]`);
+assert.equal(q('#day').disabled,true);assert.equal(q('[data-kind="plant"]').disabled,true);
+assert.equal(document.querySelectorAll('[data-card]').length,8);assert.match(q('[data-card="springtails"]').textContent,/40%–85%/);assert.match(q('[data-card="woodlice"]').textContent,/35%–75%/);assert.match(q('[data-card="humus"]').textContent,/High water retention/);
+// No visible prose or tooltip titles; spoken status remains outside the visual game.
+assert.equal([...document.body.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim(),'');assert.equal(document.querySelectorAll('[title]').length,0);
+click('#trowel');assert.equal(q('#trowel').getAttribute('aria-pressed'),'true');
+for(const soil of ['sandy','regular','humus']){choose('soil',soil);place();assert.ok(!q('[data-kind="plant"]').disabled);}
+for(const [slot,type] of ['moss','fern','foliage'].entries()){choose('plant',type);click(`[data-slot="${slot}"]`);}
+assert.equal(q('#day').disabled,false);assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,3);
+assert.equal(q('#bottle').querySelectorAll('.growing-plant-front').length,3);assert.equal(q('#bottle').querySelectorAll('.botanical-back [data-plant-slot]').length,3);assert.equal(q('#bottle').querySelectorAll('.botanical-front [data-plant-slot]').length,3);
+choose('plant','fern');click('[data-slot="2"]');assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,3);
+for(let slot=3;slot<9;slot++){choose('plant',slot<5?'foliage':'moss');click(`[data-slot="${slot}"]`);}assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,9);assert.equal(q('#bottle').querySelectorAll('.growing-plant-front').length,9);
+for(const type of ['springtails','woodlice']){choose('creature',type);place();assert.ok(q(`[data-type="${type}"]`).classList.contains('added'));}
+choose('creature','woodlice');place();assert.ok(!q('[data-type="woodlice"]').classList.contains('added'));
+click('#sprayer');place();assert.match(q('#announcement').textContent,/Water sprayed/);assert.ok(q('.water-mist'));
+const dialKey=key=>q('#light-dial').dispatchEvent(new window.KeyboardEvent('keydown',{key,bubbles:true}));
+dialKey('End');assert.equal(q('#light-dial').getAttribute('aria-valuenow'),'100');click('#undo');assert.equal(q('#light-dial').getAttribute('aria-valuenow'),'50');dialKey('Home');assert.equal(q('#light-dial').getAttribute('aria-valuenow'),'0');dialKey('PageUp');dialKey('ArrowRight');assert.equal(q('#light-dial').getAttribute('aria-valuenow'),'11');click('#undo');assert.equal(q('#light-dial').getAttribute('aria-valuenow'),'10');for(let i=0;i<4;i++)dialKey('PageUp');
+choose('plant','moss');document.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));assert.equal(q('[data-type="moss"]').getAttribute('aria-pressed'),'false');
+click('#play');assert.equal(intervals.size,1);[...intervals.values()][0]();assert.match(q('#announcement').textContent,/Day 1/);click('#play');assert.equal(intervals.size,0);
+click('#play');Object.defineProperty(document,'hidden',{value:true,configurable:true});document.dispatchEvent(new window.Event('visibilitychange'));assert.equal(intervals.size,0);Object.defineProperty(document,'hidden',{value:false,configurable:true});
+for(let i=1;i<7;i++)click('#day');assert.equal(q('#week-dialog').open,true);assert.equal(intervals.size,0);assert.ok(q('#week-title').textContent.length>0);assert.match(q('#week-summary').textContent,/Seven days/);assert.match(q('#week-stats').textContent,/Plant health/);assert.ok(q('#week-advice').textContent.length>20);click('#continue');click('#day');assert.match(q('#announcement').textContent,/Day 8/);assert.equal(q('#week-dialog').open,false);
+click('#reset');assert.equal(q('#reset-dialog').open,true);click('#cancel-reset');assert.equal(q('#day').disabled,false);click('#reset');click('#confirm-reset');assert.equal(q('#day').disabled,true);assert.equal(q('#undo').disabled,true);assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,0);
+choose('soil','humus');place();choose('plant','fern');click('[data-slot="1"]');click('#play');for(let i=0;i<7;i++)[...intervals.values()][0]();assert.equal(intervals.size,0);assert.equal(q('#week-dialog').open,true);
+console.log('PASS: wordless setup, all soils, all slots, replacement, both creatures, removal, water, all light controls, undo, tool cancellation, pause, hidden-tab pause, 7-day result, day 8, reset cancel/confirm, and automatic seven-day stop.');
