@@ -9,3 +9,5 @@ The current layout targets desktop browsers: the landscape scene scales as a who
 All 15 model/game tests and the updated DOM journey pass. Continuous light values, invalid-input handling, context-specific settlement advice, keyboard dial control and undo are included. One full mouse drag commits one undo entry. Standalone export includes desktop styling and all graphics/code.
 
 Static SVG exports are snapshots. Animated and state-dependent behavior is verified in the game, not by opening the individual exported SVG files. Keyboard and touch emulation are checked separately where available; no claim is made about every physical device or assistive technology.
+
+The specimen-card/botanical revision adds five cards with model-backed content and six front/back botanical exports. The complete DOM journey verifies all cards, moisture/retention text, all three plants in both drawing passes, replacement, creature selection and the full care/settlement/reset flow. All 63 SVG files are checked for well-formed XML. Real-browser review inspects the leaning cards, direct card selection, interwoven mixed planting, time and settlement.

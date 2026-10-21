@@ -3,7 +3,7 @@ import path from 'node:path';
 const target=path.resolve(process.argv[2]||'work/Tiny-Terrarium-Game.html');
 let html=await readFile('dist/index.html','utf8');
 const css=await readFile('dist/game.css','utf8')+'\n'+await readFile('dist/desktop.css','utf8');
-const files=['model.js','game-model.js','game-art.js','game.js'];
+const files=['model.js','game-model.js','botanical-art.js','game-art.js','game.js'];
 const source=(await Promise.all(files.map(f=>readFile(`dist/${f}`,'utf8')))).map(s=>s.replace(/^import .*;\r?\n/gm,'').replace(/^export /gm,'')).join('\n');
 html=html.replace('<link rel="stylesheet" href="game.css"><link rel="stylesheet" href="desktop.css">',`<style>${css}</style>`).replace('<script type="module" src="game.js"></script>',`<script type="module">${source}</script>`);
 await mkdir(path.dirname(target),{recursive:true});await writeFile(target,html);console.log(target);

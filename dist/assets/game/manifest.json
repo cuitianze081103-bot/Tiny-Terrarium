@@ -1,7 +1,7 @@
 {
-  "version": "desktop-dimmer-v2",
-  "count": 52,
-  "source": "dist/game-art.js, dist/game.css and dist/desktop.css",
+  "version": "botanical-specimen-cards-v3",
+  "count": 63,
+  "source": "dist/botanical-art.js, dist/game-art.js, dist/game.css and dist/desktop.css",
   "assets": [
     {
       "file": "potted-moss.svg",
@@ -20,6 +20,14 @@
       "category": "瓶内植物"
     },
     {
+      "file": "plant-moss-back.svg",
+      "category": "植物交错分层"
+    },
+    {
+      "file": "plant-moss-front.svg",
+      "category": "植物交错分层"
+    },
+    {
       "file": "potted-fern.svg",
       "category": "柜中盆栽"
     },
@@ -36,6 +44,14 @@
       "category": "瓶内植物"
     },
     {
+      "file": "plant-fern-back.svg",
+      "category": "植物交错分层"
+    },
+    {
+      "file": "plant-fern-front.svg",
+      "category": "植物交错分层"
+    },
+    {
       "file": "potted-foliage.svg",
       "category": "柜中盆栽"
     },
@@ -50,6 +66,14 @@
     {
       "file": "plant-foliage-struggling.svg",
       "category": "瓶内植物"
+    },
+    {
+      "file": "plant-foliage-back.svg",
+      "category": "植物交错分层"
+    },
+    {
+      "file": "plant-foliage-front.svg",
+      "category": "植物交错分层"
     },
     {
       "file": "soil-tray-sandy.svg",
@@ -94,6 +118,26 @@
     {
       "file": "insect-woodlice.svg",
       "category": "昆虫"
+    },
+    {
+      "file": "card-springtails.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-woodlice.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-sandy.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-regular.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-humus.svg",
+      "category": "靠罐信息卡"
     },
     {
       "file": "water-sprayer.svg",

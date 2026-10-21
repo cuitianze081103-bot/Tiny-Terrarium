@@ -34,10 +34,13 @@ Plant health, posture, size, condensation, soil darkness and crawling creatures 
 - `dist/game-model.js`: game actions and prerequisites.
 - `dist/model.js`: original deterministic ecological rules.
 - `dist/game-art.js`: editable SVG object and scene generators.
+- `dist/botanical-art.js`: redrawn moss, curved fern fronds and rounded foliage; independent front/back layers weave across neighboring plants.
 - `dist/game.css`: base room, furniture and animations.
 - `dist/desktop.css`: desktop composition, rotary control, result page and reduced motion.
 - `ASSETS.md`: complete Chinese asset inventory.
-- `dist/assets/game/`: 52 standalone SVG exports, a manifest and a gallery.
+- `dist/assets/game/`: 63 standalone SVG exports, a manifest and a gallery, including five leaning specimen cards and six separate botanical layers.
+
+Two cream specimen cards lean against the insect jars: Springtails (moisture 40–85%) and Woodlice (35–75%). Three matching cards lean against the soil bowls, showing their real game retention properties. Hover/focus enlarges a card; selecting a card selects its object. The cards stay legible before their objects unlock. Plants are composed in two passes: all rear branches first, then interwoven foreground foliage; geometry is deterministic and health/growth behavior is preserved.
 
 Regenerate assets with `node scripts/export-game-assets.mjs`. After starting the server, open `/assets/game/index.html` for the gallery. Exports are static snapshots; animation and changing environmental states are generated at runtime.
 
