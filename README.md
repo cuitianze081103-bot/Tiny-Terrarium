@@ -38,7 +38,7 @@ Plant health, posture, size, condensation, soil darkness and crawling creatures 
 - `dist/game.css`: base room, furniture and animations.
 - `dist/desktop.css`: desktop composition, rotary control, result page and reduced motion.
 - `ASSETS.md`: complete Chinese asset inventory.
-- `dist/assets/game/`: 63 standalone SVG exports, a manifest and a gallery, including five leaning specimen cards and six separate botanical layers.
+- `dist/assets/game/`: 66 standalone SVG exports, a manifest and a gallery, including five leaning specimen cards and six separate botanical layers.
 
 Two cream specimen cards lean against the insect jars: Springtails (moisture 40–85%) and Woodlice (35–75%). Three matching cards lean against the soil bowls, showing their real game retention properties. Hover/focus enlarges a card; selecting a card selects its object. The cards stay legible before their objects unlock. Plants are composed in two passes: all rear branches first, then interwoven foreground foliage; geometry is deterministic and health/growth behavior is preserved.
 
@@ -47,3 +47,6 @@ Regenerate assets with `node scripts/export-game-assets.mjs`. After starting the
 ## Checks
 
 `npm install` installs the optional jsdom development dependency. `npm test` runs ecology and game-action tests; `npm run test:journey` checks the complete DOM journey. Runtime hosting requires no dependencies or build. `npm run export:assets` refreshes the material library.
+
+
+2026-10-21: Nine independent planting positions span the whole soil bed. Moss forms an overlapping ground carpet. Plant cards for Moss, Fern and Small foliage show the exact moisture and light ranges used by the game. All 16 model tests and the complete DOM journey passed.

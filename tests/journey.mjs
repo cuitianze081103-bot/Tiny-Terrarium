@@ -15,7 +15,7 @@ await import(pathToFileURL(path.resolve('dist/game.js')).href);
 const q=s=>document.querySelector(s),click=s=>{assert.ok(q(s),s);assert.ok(!q(s).disabled,`Disabled: ${s}`);q(s).click();};
 const place=()=>click('.jar-target'),choose=(kind,type)=>click(`[data-kind="${kind}"][data-type="${type}"]`);
 assert.equal(q('#day').disabled,true);assert.equal(q('[data-kind="plant"]').disabled,true);
-assert.equal(document.querySelectorAll('[data-card]').length,5);assert.match(q('[data-card="springtails"]').textContent,/40%–85%/);assert.match(q('[data-card="woodlice"]').textContent,/35%–75%/);assert.match(q('[data-card="humus"]').textContent,/High water retention/);
+assert.equal(document.querySelectorAll('[data-card]').length,8);assert.match(q('[data-card="springtails"]').textContent,/40%–85%/);assert.match(q('[data-card="woodlice"]').textContent,/35%–75%/);assert.match(q('[data-card="humus"]').textContent,/High water retention/);
 // No visible prose or tooltip titles; spoken status remains outside the visual game.
 assert.equal([...document.body.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim(),'');assert.equal(document.querySelectorAll('[title]').length,0);
 click('#trowel');assert.equal(q('#trowel').getAttribute('aria-pressed'),'true');
@@ -24,6 +24,7 @@ for(const [slot,type] of ['moss','fern','foliage'].entries()){choose('plant',typ
 assert.equal(q('#day').disabled,false);assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,3);
 assert.equal(q('#bottle').querySelectorAll('.growing-plant-front').length,3);assert.equal(q('#bottle').querySelectorAll('.botanical-back [data-plant-slot]').length,3);assert.equal(q('#bottle').querySelectorAll('.botanical-front [data-plant-slot]').length,3);
 choose('plant','fern');click('[data-slot="2"]');assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,3);
+for(let slot=3;slot<9;slot++){choose('plant',slot<5?'foliage':'moss');click(`[data-slot="${slot}"]`);}assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,9);assert.equal(q('#bottle').querySelectorAll('.growing-plant-front').length,9);
 for(const type of ['springtails','woodlice']){choose('creature',type);place();assert.ok(q(`[data-type="${type}"]`).classList.contains('added'));}
 choose('creature','woodlice');place();assert.ok(!q('[data-type="woodlice"]').classList.contains('added'));
 click('#sprayer');place();assert.match(q('#announcement').textContent,/Water sprayed/);assert.ok(q('.water-mist'));

@@ -10,4 +10,7 @@ All 15 model/game tests and the updated DOM journey pass. Continuous light value
 
 Static SVG exports are snapshots. Animated and state-dependent behavior is verified in the game, not by opening the individual exported SVG files. Keyboard and touch emulation are checked separately where available; no claim is made about every physical device or assistive technology.
 
-The specimen-card/botanical revision adds five cards with model-backed content and six front/back botanical exports. The complete DOM journey verifies all cards, moisture/retention text, all three plants in both drawing passes, replacement, creature selection and the full care/settlement/reset flow. All 63 SVG files are checked for well-formed XML. Real-browser review inspects the leaning cards, direct card selection, interwoven mixed planting, time and settlement.
+The specimen-card/botanical revision adds five cards with model-backed content and six front/back botanical exports. The complete DOM journey verifies all cards, moisture/retention text, all three plants in both drawing passes, replacement, creature selection and the full care/settlement/reset flow. All 66 SVG files are checked for well-formed XML. Real-browser review inspects the leaning cards, direct card selection, interwoven mixed planting, time and settlement.
+
+
+2026-10-21: Nine independent planting positions span the whole soil bed. Moss forms an overlapping ground carpet. Plant cards for Moss, Fern and Small foliage show the exact moisture and light ranges used by the game. All 16 model tests and the complete DOM journey passed.

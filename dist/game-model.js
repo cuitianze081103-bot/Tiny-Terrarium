@@ -1,5 +1,6 @@
 import {freshState,advanceDay,water,SOILS,SPECIES,CREATURES,meanHealth} from './model.js';
-export const newWorld=()=>({...freshState(),gameWatered:false});
+export const PLANT_BED=[{x:210,y:317,name:'back left'},{x:280,y:310,name:'back middle'},{x:350,y:317,name:'back right'},{x:160,y:332,name:'far left'},{x:400,y:332,name:'far right'},{x:193,y:351,name:'front left'},{x:251,y:359,name:'front middle left'},{x:309,y:359,name:'front middle right'},{x:367,y:351,name:'front right'}];
+export const newWorld=()=>({...freshState(),plants:Array(PLANT_BED.length).fill(null),gameWatered:false});
 export const ready=s=>Boolean(s.soil&&s.plants.some(Boolean));
 export function weekReport(s){
  const plants=s.plants.filter(Boolean),health=Math.round(meanHealth(s));
@@ -12,7 +13,7 @@ export function weekReport(s){
 // One action has one visible consequence. Invalid actions leave the world untouched.
 export function act(s,a){
  if(a.kind==='soil'&&SOILS[a.type]){s.soil=a.type;return true;}
- if(a.kind==='plant'&&s.soil&&SPECIES[a.type]&&Number.isInteger(a.slot)&&a.slot>=0&&a.slot<3){s.plants[a.slot]={species:a.type,health:90,growth:1,stressDays:0};s.started=true;return true;}
+ if(a.kind==='plant'&&s.soil&&SPECIES[a.type]&&Number.isInteger(a.slot)&&a.slot>=0&&a.slot<PLANT_BED.length){s.plants[a.slot]={species:a.type,health:90,growth:1,stressDays:0};s.started=true;return true;}
  if(a.kind==='remove'&&s.plants[a.slot]){s.plants[a.slot]=null;s.started=ready(s);return true;}
  if(a.kind==='creature'&&ready(s)&&CREATURES[a.type]){s.creatures=s.creatures.includes(a.type)?s.creatures.filter(c=>c!==a.type):[...s.creatures,a.type];return true;}
  if(a.kind==='water'&&s.soil){water(s);s.gameWatered=true;return true;}

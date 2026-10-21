@@ -1,6 +1,6 @@
 {
-  "version": "botanical-specimen-cards-v3",
-  "count": 63,
+  "version": "full-floor-plant-cards-v4",
+  "count": 66,
   "source": "dist/botanical-art.js, dist/game-art.js, dist/game.css and dist/desktop.css",
   "assets": [
     {
@@ -137,6 +137,18 @@
     },
     {
       "file": "card-humus.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-moss.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-fern.svg",
+      "category": "靠罐信息卡"
+    },
+    {
+      "file": "card-foliage.svg",
       "category": "靠罐信息卡"
     },
     {

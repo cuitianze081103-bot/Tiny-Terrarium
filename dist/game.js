@@ -1,5 +1,5 @@
 import {SOILS,SPECIES,CREATURES,meanHealth} from './model.js';
-import {newWorld,ready,act,weekReport} from './game-model.js';
+import {PLANT_BED,newWorld,ready,act,weekReport} from './game-model.js';
 import {svg,glyph,pottedPlant,soilTray,trowel,bugBox,specimenCard,sprayer,pendant,dimmer,jar} from './game-art.js';
 const q=selector=>document.querySelector(selector);
 let world=newWorld(),selected=null,playing=false,timer=null,undoStack=[],effectTimer=null;
@@ -10,7 +10,7 @@ const say=message=>{announcement.textContent=message;};
 const copy=s=>JSON.parse(JSON.stringify(s));
 q('#seal').innerHTML=glyph('leaf');q('#undo').innerHTML=glyph('undo');q('#reset').innerHTML=glyph('reset');q('#day-icon').innerHTML=glyph('sun');q('#cancel-reset').innerHTML=glyph('close');q('#confirm-reset').innerHTML=glyph('check');q('#continue-icon').innerHTML=glyph('next');
 q('#trowel').innerHTML=trowel();q('#sprayer').innerHTML=sprayer();
-q('#plant-shelf').innerHTML=Object.entries(SPECIES).map(([type,p])=>`<div class="plant-row"><button class="plant-choice object-button" data-kind="plant" data-type="${type}" aria-label="Pick up ${p.name}" aria-pressed="false">${pottedPlant(type)}</button></div>`).join('');
+q('#plant-shelf').innerHTML=Object.entries(SPECIES).map(([type,p])=>`<div class="plant-row"><button class="plant-choice object-button" data-kind="plant" data-type="${type}" aria-label="Pick up ${p.name}" aria-pressed="false"><span class="plant-object">${pottedPlant(type)}</span><span class="specimen-card plant-card" data-card="${type}">${specimenCard(type)}</span></button></div>`).join('');
 q('#soils').innerHTML=Object.entries(SOILS).map(([type,s])=>`<button class="soil-choice object-button" data-kind="soil" data-type="${type}" aria-label="Scoop ${s.name}" aria-pressed="false"><span class="soil-object" aria-hidden="true">${soilTray(type)}</span><span class="specimen-card soil-card" data-card="${type}">${specimenCard(type)}</span></button>`).join('');
 q('#creature-boxes').innerHTML=Object.entries(CREATURES).map(([type,c])=>`<button class="creature-box object-button" data-kind="creature" data-type="${type}" aria-label="Pick up ${c.name}" aria-pressed="false"><span class="insect-object" aria-hidden="true">${bugBox(type)}</span><span class="specimen-card insect-card" data-card="${type}">${specimenCard(type)}</span></button>`).join('');
 function fitStage(){const scale=Math.min((window.innerWidth-32)/1280,(window.innerHeight-88)/720);q('#game').style.setProperty('--scene-scale',String(Math.max(.25,scale)));drawCue();}
@@ -47,7 +47,7 @@ function render(options={}){
  q('#bottle').innerHTML=jar(world,{...options,preview:selected?.kind==='plant'?selected:null});
  if(options.soilFlight||options.water){clearTimeout(effectTimer);effectTimer=setTimeout(()=>{q('#bottle').innerHTML=jar(world,{preview:selected});},1050);}
  q('.bottle-wrap').classList.toggle('target-ready',Boolean(selected&&selected.kind!=='trowel'));
- q('#drop-targets').innerHTML=`<button class="jar-target" aria-label="${selected?'Place selected object into terrarium':'Terrarium'}"></button>`+(selected?.kind==='plant'&&world.soil?[0,1,2].map((i)=>`<button class="plant-slot" style="--x:${[39.6,50.4,61.1][i]}%" data-slot="${i}" aria-label="${world.plants[i]?'Replace':'Plant in'} ${['left','middle','right'][i]} position">${glyph(world.plants[i]?'undo':'leaf')}</button>`).join(''):'');
+ q('#drop-targets').innerHTML=`<button class="jar-target" aria-label="${selected?'Place selected object into terrarium':'Terrarium'}"></button>`+(selected?.kind==='plant'&&world.soil?PLANT_BED.map((bed,i)=>`<button class="plant-slot" style="--x:${bed.x/5.6}%;--y:${bed.y/4.4}%" data-slot="${i}" aria-label="${world.plants[i]?'Replace':'Plant in'} ${bed.name} position">${glyph(world.plants[i]?'undo':'leaf')}</button>`).join(''):'');
  if(slotFocus!==undefined)q(`[data-slot="${slotFocus}"]`)?.focus();
  for(const b of document.querySelectorAll('[data-kind]')){
   const active=selected?.kind===b.dataset.kind&&selected?.type===b.dataset.type;b.setAttribute('aria-pressed',String(active));

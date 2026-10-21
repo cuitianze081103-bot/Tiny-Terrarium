@@ -4,7 +4,7 @@
 
 本版不依赖照片、AI 位图、字体文件、视频、音频、3D 模型或外部接口。全部物件均为可编辑的 SVG 绘图，房间和家具由 CSS 构成。**以下素材均已提供，无缺失的必需素材。**
 
-## 独立 SVG 文件：63 个
+## 独立 SVG 文件：66 个
 
 目录：`dist/assets/game/`。完整文件名见 `manifest.json`；可打开 `index.html` 查看素材画廊。
 
@@ -47,3 +47,6 @@
 可以直接按上表替换植物、瓶子、铲子、土盘、虫盒、喷壶和灯具。植物必须同时考虑三个健康状态与生长大小；房间家具要保留当前可点击区域。**这些是可选美术替换，不是本版缺失素材。**
 
 本版没有声音；如果后续需要，可另加铲土、放置、喷水、开关灯、日夜切换音效及静音按钮。当前无需准备这些文件。
+
+
+2026-10-21: Nine independent planting positions span the whole soil bed. Moss forms an overlapping ground carpet. Plant cards for Moss, Fern and Small foliage show the exact moisture and light ranges used by the game. All 16 model tests and the complete DOM journey passed.
