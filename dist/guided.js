@@ -17,7 +17,7 @@ function render(mist=false){
  q('#bottle').innerHTML=gardenJar(garden,{water:mist,preview:selected?.kind==='plant'?selected:null});
  q('#plant-panel').hidden=garden.stage!=='plants';q('#soil-panel').hidden=garden.stage!=='soil';q('#creature-panel').hidden=garden.stage!=='creatures';q('#sprayer').hidden=garden.stage!=='care';
  const titles={soil:'Add soil',plants:'Plant your terrarium',creatures:'Add tiny creatures',care:'Water & grow'};
- q('#stage-title').textContent=titles[garden.stage];q('#stage-number').textContent=String(['soil','plants','creatures','care'].indexOf(garden.stage)+1);
+ q('#stage-title').textContent=titles[garden.stage];const stepIndex=['soil','plants','creatures','care'].indexOf(garden.stage);q('#stage-number').textContent=`0${stepIndex+1} / 04`;q('#step-track').innerHTML=Array.from({length:4},(_,i)=>`<span class="${i<=stepIndex?'passed':''} ${i===stepIndex?'current':''}"></span>`).join('');
  q('#next').hidden=!['plants','creatures'].includes(garden.stage);q('#next').disabled=garden.stage==='plants'?!garden.plants.some(Boolean):!garden.creatures.length;
  q('#next-label').textContent=garden.stage==='plants'?'Finish planting':'Finish setup';
  q('#drop-targets').innerHTML=`<button class="jar-target" aria-label="${garden.stage==='care'?'Water terrarium':selected?'Place selected object into terrarium':'Terrarium'}"></button>`+(selected?.kind==='plant'?PLANT_BED.map((bed,i)=>`<button class="plant-slot" style="--x:${bed.x/5.6}%;--y:${bed.y/4.4}%" data-slot="${i}" aria-label="${garden.plants[i]?'Replace':'Plant in'} ${bed.name} position">${glyph(garden.plants[i]?'undo':'leaf')}</button>`).join(''):'');
