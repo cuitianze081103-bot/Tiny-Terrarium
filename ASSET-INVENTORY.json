@@ -1,0 +1,499 @@
+{
+  "version": "vintage-complete-assets",
+  "runtimeFiles": [
+    "dist/botanical-art.js",
+    "dist/desktop.css",
+    "dist/game-art.js",
+    "dist/game-model.js",
+    "dist/game.css",
+    "dist/guided-art.js",
+    "dist/guided-model.js",
+    "dist/guided.css",
+    "dist/guided.js",
+    "dist/index.html",
+    "dist/model.js",
+    "dist/shop.css"
+  ],
+  "externalRuntimeDependencies": [],
+  "fonts": [
+    "system-ui",
+    "Georgia",
+    "Arial",
+    "serif",
+    "sans-serif"
+  ],
+  "fontFilesRequired": false,
+  "count": 94,
+  "assets": [
+    {
+      "path": "dist/assets/game/card-fern.svg",
+      "bytes": 150314,
+      "sha256": "f4f6d91f36df7641dd70f668773a43d9abd845605ccf84780e8b4a95b812fe2f"
+    },
+    {
+      "path": "dist/assets/game/card-foliage.svg",
+      "bytes": 29121,
+      "sha256": "6694223cbbd9def5148f56d36c672fdfd3bd2ab3568a1ca1017e2807be1d19a1"
+    },
+    {
+      "path": "dist/assets/game/card-humus.svg",
+      "bytes": 3331,
+      "sha256": "4f480eeaca5750b2a8df215f259a412cf85179a17ed1117759fce84feedece28"
+    },
+    {
+      "path": "dist/assets/game/card-moss.svg",
+      "bytes": 115919,
+      "sha256": "0f96a2908cd57254b50e2b4818e9c86d73d1afa071efca5eb07fd4a0de8b9983"
+    },
+    {
+      "path": "dist/assets/game/card-regular.svg",
+      "bytes": 3248,
+      "sha256": "95d6614c4e043afca64a10ba4723b936f2d4d93d50c9b518d5a72a2f38abd1de"
+    },
+    {
+      "path": "dist/assets/game/card-sandy.svg",
+      "bytes": 3247,
+      "sha256": "bc759da5082f98ca820765a244cda57dd877e367fcfbcacd13606f2f1a28b3ba"
+    },
+    {
+      "path": "dist/assets/game/card-springtails.svg",
+      "bytes": 1619,
+      "sha256": "bcffe42b34a210f9817d72be0cf1127ad41077bf9a0254b0cca235ec8abb439a"
+    },
+    {
+      "path": "dist/assets/game/card-woodlice.svg",
+      "bytes": 1586,
+      "sha256": "c42566cede66ec2a95e44833d25cf8ded713b87ef18693b771d29fb175aba48c"
+    },
+    {
+      "path": "dist/assets/game/dimmer-0.svg",
+      "bytes": 1747,
+      "sha256": "e213f6568e7eaecb49f29ade5eee7d7966422a6901fade0a4bab7866c889a5a9"
+    },
+    {
+      "path": "dist/assets/game/dimmer-100.svg",
+      "bytes": 1746,
+      "sha256": "4388f5063826736363593b4b2605e0e33f153ed6d3c254c30198e9ae9503b56b"
+    },
+    {
+      "path": "dist/assets/game/dimmer-50.svg",
+      "bytes": 1744,
+      "sha256": "4bf770ed6548324bcc22186a60432a672186a8bf10ed5300d7628e53d5023b96"
+    },
+    {
+      "path": "dist/assets/game/environment-window.svg",
+      "bytes": 248,
+      "sha256": "bb112289fd5dc2bbe595cbbe73eba2e86cb241b6171cf4f196fc85349e766347"
+    },
+    {
+      "path": "dist/assets/game/environment-workbench.svg",
+      "bytes": 393,
+      "sha256": "893f41349a2ba32ccefabeba0523a57249e6493ab499b26093a5db901fa26a9d"
+    },
+    {
+      "path": "dist/assets/game/furniture-insect-shelf.svg",
+      "bytes": 167,
+      "sha256": "00c252609c60f202dbec51405a41a9c5eb479b34e065958c91a0c0b411dfedfb"
+    },
+    {
+      "path": "dist/assets/game/furniture-plant-cabinet.svg",
+      "bytes": 321,
+      "sha256": "46053bd99e44ff3f426b2391020bdfa7d494f536d9669dca73c4f3f50e7d83c0"
+    },
+    {
+      "path": "dist/assets/game/furniture-soil-tray.svg",
+      "bytes": 165,
+      "sha256": "bdc3b3b9875886e24399666cd4c5edcfc62e5b2d8eeb86a326735c5524ee2226"
+    },
+    {
+      "path": "dist/assets/game/insect-box-springtails.svg",
+      "bytes": 1810,
+      "sha256": "624023324643978ee746df2ff670057e5082ba40d9c47e3753c780dea2dff14f"
+    },
+    {
+      "path": "dist/assets/game/insect-box-woodlice.svg",
+      "bytes": 1780,
+      "sha256": "793a625406d61f05140ee314ccd480186bd756179e9e9c67a487f3ba7d88575a"
+    },
+    {
+      "path": "dist/assets/game/insect-springtails.svg",
+      "bytes": 386,
+      "sha256": "0232c39b8d4071aedae0ef3d6a58cfa86691cadf145ec77757ad217455d2fd83"
+    },
+    {
+      "path": "dist/assets/game/insect-woodlice.svg",
+      "bytes": 371,
+      "sha256": "fe1d57b8c10a2c4f12615daf850d7552acf2e4e992ff6ad30867ff369fafb5dc"
+    },
+    {
+      "path": "dist/assets/game/jar-empty.svg",
+      "bytes": 3274,
+      "sha256": "9b65b46e3b2c32e3e94fc480400779effb56de6df7ab43cf8e660733455e60f9"
+    },
+    {
+      "path": "dist/assets/game/jar-planted.svg",
+      "bytes": 1633639,
+      "sha256": "4f0260a413ec3625d9e3351a35aba0e1fb7653e30064190541f5f57f7f3ccafc"
+    },
+    {
+      "path": "dist/assets/game/jar-soil.svg",
+      "bytes": 7212,
+      "sha256": "871bc4efc72a3519262529c72a95d04bbdcd9f33795182e62a53e90be6c65cf7"
+    },
+    {
+      "path": "dist/assets/game/jar-struggling.svg",
+      "bytes": 1633667,
+      "sha256": "85c3835cc4dc203f818f664c1d603ffdf3cee9ff5dd890dbb5006ec7562ae764"
+    },
+    {
+      "path": "dist/assets/game/jar-watering.svg",
+      "bytes": 1636035,
+      "sha256": "fc42763e7a3667ced272c7f427aff074a12d1c5b988cce4565e20f90f08cf69b"
+    },
+    {
+      "path": "dist/assets/game/jar-week-complete.svg",
+      "bytes": 1633759,
+      "sha256": "df656116008c94db732555ded603120a77079530162dc75506fa482a18741c6e"
+    },
+    {
+      "path": "dist/assets/game/pendant-0.svg",
+      "bytes": 487,
+      "sha256": "90b254e028b65f7d8502b38b1f998d617e250dcc4f4f35b4c5a8283c3f910251"
+    },
+    {
+      "path": "dist/assets/game/pendant-100.svg",
+      "bytes": 487,
+      "sha256": "bae7a055da02d2d0e163ac0baab8726810490efb2f897ff9b8291e2678b21e5c"
+    },
+    {
+      "path": "dist/assets/game/pendant-50.svg",
+      "bytes": 489,
+      "sha256": "70e0f90339bea547b21ad1f4849bb57389927bb5a59f85d71860b7843ec17f9a"
+    },
+    {
+      "path": "dist/assets/game/plant-fern-back.svg",
+      "bytes": 83206,
+      "sha256": "779b7cb6d4d6f21b07ae9a74de260a8bb639b1286f18e3c3858251a4c0986862"
+    },
+    {
+      "path": "dist/assets/game/plant-fern-front.svg",
+      "bytes": 66409,
+      "sha256": "483de090ac2d35dcef37a074a20672216b20ab52e5acf3426ead8a265296a25b"
+    },
+    {
+      "path": "dist/assets/game/plant-fern-healthy.svg",
+      "bytes": 149495,
+      "sha256": "92d586d2bb112725e37cc12807a855179f73557e9de94c20721838fb83859d60"
+    },
+    {
+      "path": "dist/assets/game/plant-fern-stressed.svg",
+      "bytes": 149495,
+      "sha256": "612fac74b0626103d62b4b04a4415a242c0953e219d4a36c7f01b516d9f43e21"
+    },
+    {
+      "path": "dist/assets/game/plant-fern-struggling.svg",
+      "bytes": 149495,
+      "sha256": "7895645cc84561e7634e013eff63f32d513c19024d3b901869209c7ffb8e2f0f"
+    },
+    {
+      "path": "dist/assets/game/plant-foliage-back.svg",
+      "bytes": 14324,
+      "sha256": "aad93e7e48263f2c05ce0a4d2d0afe9ddde2bc06cc5b6fd25450568a50190687"
+    },
+    {
+      "path": "dist/assets/game/plant-foliage-front.svg",
+      "bytes": 14089,
+      "sha256": "fcb738dd4cacd66ec2011da31adc01f52dd3f7388cf2204f84a0c456d0719c96"
+    },
+    {
+      "path": "dist/assets/game/plant-foliage-healthy.svg",
+      "bytes": 28293,
+      "sha256": "30e6a91e1772c9bcf20a083bcc2eabd04c3b141440d611791de28d6501d8756a"
+    },
+    {
+      "path": "dist/assets/game/plant-foliage-stressed.svg",
+      "bytes": 28293,
+      "sha256": "85779806f8f548cb9ff05657a42320c2e8e3d4bdb3c8960605a5ba3f374b4283"
+    },
+    {
+      "path": "dist/assets/game/plant-foliage-struggling.svg",
+      "bytes": 28293,
+      "sha256": "36a66f442f43102d4892dc5c9dd75d61625c60423b20e2e64240424fe1a2f4f1"
+    },
+    {
+      "path": "dist/assets/game/plant-moss-back.svg",
+      "bytes": 68039,
+      "sha256": "2c3825bd6e98d4d555efe1722d514e8f50e819163198d45ca21dc57f29054e69"
+    },
+    {
+      "path": "dist/assets/game/plant-moss-front.svg",
+      "bytes": 47181,
+      "sha256": "d1ad52f2183a6cc260b16682c70ade3ece6f14b7fcbc804d5fc26ff73913035d"
+    },
+    {
+      "path": "dist/assets/game/plant-moss-healthy.svg",
+      "bytes": 115100,
+      "sha256": "77432cfb38f717d2bdf37e151063f0267497a67b4769c2f25156d831adc95f94"
+    },
+    {
+      "path": "dist/assets/game/plant-moss-stressed.svg",
+      "bytes": 115100,
+      "sha256": "ebdcfde1ec64ea1d0801c1a634a039abe762ece6057caba648d0c0a73c67cfb9"
+    },
+    {
+      "path": "dist/assets/game/plant-moss-struggling.svg",
+      "bytes": 115100,
+      "sha256": "9016132e15228e8454724815a9ad9e2f012c81e5d8f22619804478faafa1c72f"
+    },
+    {
+      "path": "dist/assets/game/potted-fern.svg",
+      "bytes": 149762,
+      "sha256": "6b983de4f50237d5f5892af4eee7dec24753b8dd48b8128cf2eb02534e8f7a73"
+    },
+    {
+      "path": "dist/assets/game/potted-foliage.svg",
+      "bytes": 28560,
+      "sha256": "c69da835262fd4f93248b294ae8c8c443202e8afbd49e8ea37f82f06f9d13d17"
+    },
+    {
+      "path": "dist/assets/game/potted-moss.svg",
+      "bytes": 115367,
+      "sha256": "8d0fd12d7dd55b1c16aab19c2bf489f5507ed36616b61c16183e909cda712263"
+    },
+    {
+      "path": "dist/assets/game/soil-tray-humus.svg",
+      "bytes": 2491,
+      "sha256": "efacae9e4a39d865a4a55cd387d4af0d61f7b4a156d6d866cafca730602ce246"
+    },
+    {
+      "path": "dist/assets/game/soil-tray-regular.svg",
+      "bytes": 2413,
+      "sha256": "02b02f1981fd1af7f2d3e423625fe16228be473b940502d67897151584bd9b08"
+    },
+    {
+      "path": "dist/assets/game/soil-tray-sandy.svg",
+      "bytes": 2413,
+      "sha256": "6532a4ef9ca2fb3376ee81f2203b05e694a51193e602ad1b2888997447153c62"
+    },
+    {
+      "path": "dist/assets/game/symbol-check.svg",
+      "bytes": 208,
+      "sha256": "964c11d8037d62c7d7867c2039a5bdca8b13d6333e30425963bd1d63ab723b32"
+    },
+    {
+      "path": "dist/assets/game/symbol-close.svg",
+      "bytes": 214,
+      "sha256": "514295f527468a192cf57b6cafa212d84a8cc4ec09ba8793d2138fd915d0fcc2"
+    },
+    {
+      "path": "dist/assets/game/symbol-drop.svg",
+      "bytes": 242,
+      "sha256": "f6c7bb47de07c6bb6a16b904a7e6ffd64162ba795595b113cedf0b7fbdea7d04"
+    },
+    {
+      "path": "dist/assets/game/symbol-hand.svg",
+      "bytes": 301,
+      "sha256": "1723c4d48e293183a6fce567f8a286c3322204e149477de303146e9ce29287dd"
+    },
+    {
+      "path": "dist/assets/game/symbol-leaf.svg",
+      "bytes": 238,
+      "sha256": "9b18899ff0eb0e4044536a1d4e5a8a2a105b128c9c5796fc356408469397aa98"
+    },
+    {
+      "path": "dist/assets/game/symbol-next.svg",
+      "bytes": 214,
+      "sha256": "a3ef1ff5af4e4a7f8f337a149abd5f38261094cd948d4f1e8a31eb7f4a428983"
+    },
+    {
+      "path": "dist/assets/game/symbol-pause.svg",
+      "bytes": 209,
+      "sha256": "aaaa14c73ab9603acb557e231ba697456e121480fcbb418337fe39677298f2fb"
+    },
+    {
+      "path": "dist/assets/game/symbol-play.svg",
+      "bytes": 223,
+      "sha256": "be14fb8ebe3df93a9c50672849a676bc9180bf29728f02d9fd69da84ae5b4e12"
+    },
+    {
+      "path": "dist/assets/game/symbol-reset.svg",
+      "bytes": 221,
+      "sha256": "1b5f95495364a3f8245e3d6de41d8bfbde6ba597bebe76a9f73ad08b8c4e7ee0"
+    },
+    {
+      "path": "dist/assets/game/symbol-sun.svg",
+      "bytes": 292,
+      "sha256": "2fb8edc59f1eb9372b88a675d6e68a3b5ba1f1cf96ac06058ee12e97266f4f88"
+    },
+    {
+      "path": "dist/assets/game/symbol-undo.svg",
+      "bytes": 221,
+      "sha256": "c256e9bc0e98d8ac83b6071899ff00b61946201bd19319b77c808b51c4301d04"
+    },
+    {
+      "path": "dist/assets/game/trowel-empty.svg",
+      "bytes": 489,
+      "sha256": "c0945a3224fa0590216742370d84dfaa1ef7821c9adbaa46731f1a6d80de9d72"
+    },
+    {
+      "path": "dist/assets/game/trowel-humus.svg",
+      "bytes": 561,
+      "sha256": "6d59576e233c23f8d9ba3cd1822dce96a74a7b8928f3f779e362f2014ff2916f"
+    },
+    {
+      "path": "dist/assets/game/trowel-regular.svg",
+      "bytes": 561,
+      "sha256": "ab0296e9f1c78f0b78c053622cbf836060b8bd07b2992901a2ca598294c4f91c"
+    },
+    {
+      "path": "dist/assets/game/trowel-sandy.svg",
+      "bytes": 561,
+      "sha256": "ccd280fa151238f6192fff80296069638ff416d59d69b2ce78e59084e145b7c6"
+    },
+    {
+      "path": "dist/assets/game/water-sprayer.svg",
+      "bytes": 720,
+      "sha256": "09a1af64a32478415cef99f3cb73859ea47f4f6cc1d5871a53856491e2873766"
+    },
+    {
+      "path": "dist/assets/guided/jar-empty.svg",
+      "bytes": 3309,
+      "sha256": "a9956120aa8de64684368e5ba7ba4464ad34f530348feeea19c2e89b383267ad"
+    },
+    {
+      "path": "dist/assets/guided/jar-grown.svg",
+      "bytes": 1633113,
+      "sha256": "582e6097ef76d4bf0fec47ba96f942206d48fd00ab0d925f3ddc7752e536bd6d"
+    },
+    {
+      "path": "dist/assets/guided/jar-seedlings.svg",
+      "bytes": 1633216,
+      "sha256": "b936df48408421f434761f9cb7c6297fb8d4b0d0d51781dd527e3c78fec0638b"
+    },
+    {
+      "path": "dist/assets/guided/large-springtails.svg",
+      "bytes": 386,
+      "sha256": "0232c39b8d4071aedae0ef3d6a58cfa86691cadf145ec77757ad217455d2fd83"
+    },
+    {
+      "path": "dist/assets/guided/large-woodlice.svg",
+      "bytes": 371,
+      "sha256": "fe1d57b8c10a2c4f12615daf850d7552acf2e4e992ff6ad30867ff369fafb5dc"
+    },
+    {
+      "path": "dist/assets/vintage/bottle-contact-shadow.svg",
+      "bytes": 363,
+      "sha256": "056166e9d7bb2ce83026b3c2e7d39e9edba0b94420549c1af28433926a4ed7e0"
+    },
+    {
+      "path": "dist/assets/vintage/button-disabled.svg",
+      "bytes": 362,
+      "sha256": "80c1da71457172503dcc40da724eed17cdd5b3e09ecfca62ac12e13eb5b33726"
+    },
+    {
+      "path": "dist/assets/vintage/button-ready.svg",
+      "bytes": 359,
+      "sha256": "fa44d943888ea76795082336e4c480d0aeccff01e507aa016da2ff67adcd1f8e"
+    },
+    {
+      "path": "dist/assets/vintage/label-blank.svg",
+      "bytes": 250,
+      "sha256": "4b3d6f4f430e4b7712497810f42d27441cfa60bee9296336b57a341906ed3e0b"
+    },
+    {
+      "path": "dist/assets/vintage/label-fern.svg",
+      "bytes": 150203,
+      "sha256": "8f31137638761712f51900ada802f872e8e366491a32dd9e750c65ee156783ec"
+    },
+    {
+      "path": "dist/assets/vintage/label-foliage.svg",
+      "bytes": 29010,
+      "sha256": "fc59377482ed14cce3e9f91f6e4760a93ce7a1b89b49499093a590bc6343efd9"
+    },
+    {
+      "path": "dist/assets/vintage/label-humus.svg",
+      "bytes": 3325,
+      "sha256": "fb4bda697f201d189334e87d15f09f5bf386f3b81b60a8d5635be25b0982f1f6"
+    },
+    {
+      "path": "dist/assets/vintage/label-moss.svg",
+      "bytes": 115808,
+      "sha256": "9ce782f0b4969081145d211913b2a1e494562291b48ab69cfca4e7db442da77b"
+    },
+    {
+      "path": "dist/assets/vintage/label-regular.svg",
+      "bytes": 3242,
+      "sha256": "2f08616c8c15f2bee39293795968a470320deadf11b7cd057be11cc4209dfae5"
+    },
+    {
+      "path": "dist/assets/vintage/label-sandy.svg",
+      "bytes": 3241,
+      "sha256": "6a866ea9af88c1aa13668c6a3962d6a92b3406847205cfd2181abc1336a8901e"
+    },
+    {
+      "path": "dist/assets/vintage/label-springtails.svg",
+      "bytes": 1613,
+      "sha256": "d0163fd28eec7aa6184f847427346c65e39d79b2da533e276a2c02b6a7194dec"
+    },
+    {
+      "path": "dist/assets/vintage/label-woodlice.svg",
+      "bytes": 1580,
+      "sha256": "8347d554c78da4e034b8fd1d225899abb2477a36cbf70c2acd1df65d5a292a18"
+    },
+    {
+      "path": "dist/assets/vintage/lamp-brass.svg",
+      "bytes": 489,
+      "sha256": "8ff4538b6c0ea11418745937dd7d2750f662ef8aa7da789a367dcced1bc834cd"
+    },
+    {
+      "path": "dist/assets/vintage/material-cabinet.svg",
+      "bytes": 525,
+      "sha256": "f8653a72eb7186e92465d91a6dbe4d02062218dac56efa38440f55ffbd7cbb96"
+    },
+    {
+      "path": "dist/assets/vintage/paper-grain.svg",
+      "bytes": 264,
+      "sha256": "5f4ce982d72c429ab13835857ff59929bc301494d036385df600637c972adfc3"
+    },
+    {
+      "path": "dist/assets/vintage/plant-shelves.svg",
+      "bytes": 661,
+      "sha256": "516e398868964019eba70df31a1dc79c546b73ee03d1255f7f9cddc522f0ca3c"
+    },
+    {
+      "path": "dist/assets/vintage/step-track-1.svg",
+      "bytes": 402,
+      "sha256": "d9e12826cbb8d09c28bad0e50e955b8ab2733f15bd57534dbabf1b1ff05aa72d"
+    },
+    {
+      "path": "dist/assets/vintage/step-track-2.svg",
+      "bytes": 399,
+      "sha256": "fd2fe684ca6f3f61d4b8a2f1b81234d57189120ae1671b943c2cc062d487d42f"
+    },
+    {
+      "path": "dist/assets/vintage/step-track-3.svg",
+      "bytes": 396,
+      "sha256": "41c5855fce63580fb8d5b74f6a61a6288cd2238b86313f6c7d50c7e1e59b3a1e"
+    },
+    {
+      "path": "dist/assets/vintage/step-track-4.svg",
+      "bytes": 393,
+      "sha256": "0ac41a161642ea6505462ff7a341f05311433523c6c2390bae8aacc31136283c"
+    },
+    {
+      "path": "dist/assets/vintage/wall-forest.svg",
+      "bytes": 484,
+      "sha256": "c70a348d2fd22bc937a01075f776e8573b189f02c1a97f39e74c43c5aa5b631f"
+    },
+    {
+      "path": "dist/assets/vintage/window-arched.svg",
+      "bytes": 519,
+      "sha256": "94970696867c6afbf2a9d1d81aeb6cf675f52fada858ebf0998169b424c3758e"
+    },
+    {
+      "path": "dist/assets/vintage/workbench-walnut.svg",
+      "bytes": 497,
+      "sha256": "090afafc848edb70537721292df1a36b814d0f6e6c3d1e7f45401d30175557af"
+    }
+  ]
+}

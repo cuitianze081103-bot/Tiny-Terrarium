@@ -13,3 +13,10 @@ Springtails and woodlice render in the foreground above foliage and glass overla
 - `dist/assets/guided/`: 5 additional exported SVGs
 
 Run model tests and tests/guided-journey.mjs. tests/journey.mjs checks the preserved previous UI.
+
+
+## 完整元素下载
+
+[素材清单](ASSETS.md) · [94 个 SVG 总览源码](dist/assets/vintage/index.html) · [完整素材 ZIP](downloads/Tiny-Terrarium-All-Assets.zip) · [离线试玩 HTML](downloads/Tiny-Terrarium-Playable.html) · [文件校验清单](ASSET-INVENTORY.json)
+
+![复古植物店界面](docs/previews/vintage-creatures.jpg)

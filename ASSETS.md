@@ -54,3 +54,16 @@
 
 ## Guided Grow additions
 Five SVGs in `dist/assets/guided/`: empty jar, seedlings with large foreground creatures, grown jar, large springtails, large woodlice. Shared furniture, plant art, soil trays, and sprayer remain editable in the existing asset library.
+
+
+## 完整素材归档（复古植物店版）
+
+- `dist/assets/game/`：66 个植物、虫子、土壤、工具、场景及状态 SVG。
+- `dist/assets/guided/`：5 个逐步种植与大虫子 SVG。
+- `dist/assets/vintage/`：23 个复古墙面、拱窗、木桌、柜子、纸卡、按钮、步骤状态、顶灯、阴影与纹理 SVG。CSS 元素提供可编辑矢量导出，游戏中的精确样式仍以源码为准。
+- `dist/assets/vintage/index.html`：全部 94 个 SVG 的素材总览。
+- `ASSET-INVENTORY.json`：素材路径、体积、SHA-256，以及从主页追踪的所有运行文件。
+- `downloads/Tiny-Terrarium-All-Assets.zip`：完整素材 ZIP。
+- `downloads/Tiny-Terrarium-Playable.html`：可离线直接打开的完整游戏。
+
+所有运行依赖均为本地代码或内嵌 SVG；使用系统字体，不依赖外部字体文件。参考游戏截图不属于实际游戏资源，未混入素材包。
