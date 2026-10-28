@@ -4,7 +4,7 @@ import {pathToFileURL} from 'node:url';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const {JSDOM}=await import(process.env.JSDOM_MODULE||'jsdom');
-const dom=new JSDOM(await readFile('dist/index.html','utf8'),{url:'https://terrarium.test/'});
+const dom=new JSDOM(await readFile('dist/greenhouse-previous.html','utf8'),{url:'https://terrarium.test/'});
 globalThis.window=dom.window;globalThis.document=dom.window.document;
 globalThis.requestAnimationFrame=()=>0;
 const intervals=new Map();let serial=0;

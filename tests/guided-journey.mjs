@@ -1,0 +1,16 @@
+import {readFile} from 'node:fs/promises';
+import {pathToFileURL} from 'node:url';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const {JSDOM}=await import(process.env.JSDOM_MODULE||'jsdom');
+const dom=new JSDOM(await readFile('dist/index.html','utf8'),{url:'https://terrarium.test/'});
+globalThis.window=dom.window;globalThis.document=dom.window.document;globalThis.innerWidth=1280;globalThis.innerHeight=800;
+window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};window.HTMLDialogElement.prototype.close=function(){this.open=false;};
+await import(pathToFileURL(path.resolve('dist/guided.js')).href);
+const q=s=>document.querySelector(s),click=s=>{assert.ok(q(s),s);assert.ok(!q(s).disabled,s);q(s).click();};
+assert.equal(document.body.dataset.stage,'soil');assert.equal(q('#soil-panel').hidden,false);for(const s of ['#plant-panel','#creature-panel','#sprayer','#next'])assert.equal(q(s).hidden,true);for(const s of ['#light-dial','#day','#play','#week-dialog'])assert.equal(q(s),null);
+click('[data-kind="soil"][data-type="humus"]');click('.jar-target');assert.equal(document.body.dataset.stage,'plants');assert.equal(q('#soil-panel').hidden,true);assert.equal(q('#next').disabled,true);
+for(let slot=0;slot<9;slot++){click(`[data-kind="plant"][data-type="${slot<3?'fern':'moss'}"]`);assert.equal(document.querySelectorAll('.plant-slot').length,9);click(`[data-slot="${slot}"]`);}assert.equal(q('#bottle').querySelectorAll('.growing-plant').length,9);click('#next');assert.equal(document.body.dataset.stage,'creatures');assert.equal(q('#plant-panel').hidden,true);assert.equal(q('#next').disabled,true);
+for(const type of ['springtails','woodlice']){click(`[data-kind="creature"][data-type="${type}"]`);click('.jar-target');}assert.equal(q('#bottle').querySelectorAll('[data-resident]').length,4);click('#next');assert.equal(document.body.dataset.stage,'care');for(const s of ['#plant-panel','#soil-panel','#creature-panel','#next'])assert.equal(q(s).hidden,true);assert.equal(q('#sprayer').hidden,false);
+const before=q('#bottle').innerHTML;click('#sprayer');const grown=q('#bottle').innerHTML;assert.notEqual(before,grown);assert.equal(q('#bottle').querySelectorAll('[data-resident]').length,4);click('#undo');assert.equal(q('#bottle').innerHTML,before);click('.jar-target');assert.equal(q('#bottle').innerHTML,grown);for(let i=0;i<10;i++)click('#sprayer');assert.equal(q('#bottle').querySelectorAll('[data-resident]').length,4);click('#reset');click('#cancel-reset');assert.equal(document.body.dataset.stage,'care');click('#reset');click('#confirm-reset');assert.equal(document.body.dataset.stage,'soil');assert.equal(q('#undo').disabled,true);assert.equal(q('#bottle').querySelectorAll('[data-resident]').length,0);
+console.log('PASS: sequential soil, nine plants, both large resident species, care-only watering, repeated growth, undo and reset.');

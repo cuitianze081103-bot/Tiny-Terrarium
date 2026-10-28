@@ -50,3 +50,7 @@
 
 
 2026-10-21: Nine independent planting positions span the whole soil bed. Moss forms an overlapping ground carpet. Plant cards for Moss, Fern and Small foliage show the exact moisture and light ranges used by the game. All 16 model tests and the complete DOM journey passed.
+
+
+## Guided Grow additions
+Five SVGs in `dist/assets/guided/`: empty jar, seedlings with large foreground creatures, grown jar, large springtails, large woodlice. Shared furniture, plant art, soil trays, and sprayer remain editable in the existing asset library.

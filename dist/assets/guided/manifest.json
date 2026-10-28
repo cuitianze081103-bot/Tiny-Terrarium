@@ -1,0 +1,14 @@
+{
+  "count": 5,
+  "source": [
+    "guided-art.js",
+    "guided-model.js"
+  ],
+  "assets": [
+    "jar-empty.svg",
+    "jar-seedlings.svg",
+    "jar-grown.svg",
+    "large-springtails.svg",
+    "large-woodlice.svg"
+  ]
+}
