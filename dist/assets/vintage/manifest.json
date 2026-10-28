@@ -1,0 +1,30 @@
+{
+  "count": 23,
+  "source": "dist/shop.css and dist/game-art.js",
+  "note": "Editable vector exports of CSS-drawn vintage UI. The exact live appearance is defined by the tracked stylesheets.",
+  "assets": [
+    "label-moss.svg",
+    "label-fern.svg",
+    "label-foliage.svg",
+    "label-springtails.svg",
+    "label-woodlice.svg",
+    "label-sandy.svg",
+    "label-regular.svg",
+    "label-humus.svg",
+    "wall-forest.svg",
+    "window-arched.svg",
+    "workbench-walnut.svg",
+    "material-cabinet.svg",
+    "plant-shelves.svg",
+    "label-blank.svg",
+    "button-ready.svg",
+    "button-disabled.svg",
+    "step-track-1.svg",
+    "step-track-2.svg",
+    "step-track-3.svg",
+    "step-track-4.svg",
+    "lamp-brass.svg",
+    "bottle-contact-shadow.svg",
+    "paper-grain.svg"
+  ]
+}

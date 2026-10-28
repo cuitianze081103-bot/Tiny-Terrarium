@@ -1,15 +1,12 @@
-# Verification
+# Guided Grow validation
 
-Passed on October 10, 2026:
+17 model tests passed, including stage guards, removal of light/day actions, nine independent plants, repeated watering with bounded growth, and four foreground residents.
 
-- Nine Node model tests: determinism; soil retention ordering; light-driven evaporation; prolonged dryness and recovery; waterlogging and light stress; species-specific ranges; creature stress and recovery; water caps and 200-day bounds; incomplete-world gating.
-- A jsdom integration run against the real HTML and application modules completed setup through day seven, continued to day eight, and restarted from a clean state.
-- The integration run also covered all soil choices, all three planting slots, replacement/removal, required-step gating, returning to earlier steps without losing selections or days, both creature types, explicit skip, water/light sliders, watering, manual days, automatic playback, pausing, guide-induced pause, focus retention, summary reopening, reset cancellation/confirmation, and automatic pause at day seven.
-- JavaScript syntax checks passed.
+The guided DOM journey verifies only one active panel, no lamp/day/autoplay controls, full planting, both creatures, care-only watering, undo, and reset. The preserved legacy journey continues to test the previous version.
 
-The DOM test uses simulated timers and dialog methods; it is not a real browser or a visual test. The local server launched, but the browser automation tool denied access under its URL security policy. Desktop/mobile rendering, native keyboard activation, animation appearance, native dialog focus trapping, and reduced-motion rendering were therefore not visually verified. Responsive CSS, native controls, visible focus outlines and reduced-motion rules are implemented.
+Real browser inspection checks soil-only setup, stage transitions, nine plants, both large visible resident species, and watering growth with no overlapping selection panels.
 
-## Upload verification — October 18, 2026
+Vintage UI: guided model and full DOM journey passed again. Real-browser QA covered all four stages with nine planted slots, both foreground resident species, repeated watering, and no console warnings/errors. Second variant files unchanged.
 
-Restored the published version 1 source (a4a2feb9053060db3bae4a2ad542ef4c399b1506). Syntax checks, all 9 model tests, and the complete DOM journey passed again. The journey used the existing local jsdom installation; no runtime dependencies were added. Exported 22 standalone SVG files and a gallery. SVG XML validation passed. This is a source and asset archive; no website redeployment or new visual-browser verification was performed.
 
+Object handoff revision: no headings, step numbers, Finish buttons or light/day controls. Tests verify current materials persist after the next group appears, and hide only on pickup. All nine plants and both species remain addable before each handoff. Click and pointer-drag pickup, undo across pickup, reset, and repeated watering are tested.
