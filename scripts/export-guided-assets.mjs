@@ -5,7 +5,7 @@ import {svg,bug} from '../dist/game-art.js';
 const out=new URL('../dist/assets/guided/',import.meta.url);await mkdir(out,{recursive:true});
 const save=(name,content)=>writeFile(new URL(name,out),content+'\n');
 const s=newGarden();await save('jar-empty.svg',gardenJar(s));gardenAct(s,{kind:'soil',type:'humus'});
-for(let slot=0;slot<9;slot++)gardenAct(s,{kind:'plant',type:['fern','foliage','fern','moss','foliage','moss','moss','moss','moss'][slot],slot});gardenAct(s,{kind:'next'});for(const type of ['springtails','woodlice'])gardenAct(s,{kind:'creature',type});gardenAct(s,{kind:'next'});
+gardenAct(s,{kind:'pickup',type:'plant'});for(let slot=0;slot<9;slot++)gardenAct(s,{kind:'plant',type:['fern','foliage','fern','moss','foliage','moss','moss','moss','moss'][slot],slot});gardenAct(s,{kind:'pickup',type:'creature'});for(const type of ['springtails','woodlice'])gardenAct(s,{kind:'creature',type});gardenAct(s,{kind:'pickup',type:'water'});
 await save('jar-seedlings.svg',gardenJar(s));for(let i=0;i<10;i++)gardenAct(s,{kind:'water'});await save('jar-grown.svg',gardenJar(s));
 for(const type of ['springtails','woodlice'])await save(`large-${type}.svg`,svg(bug(type,50,30),'0 0 100 60'));
 await save('manifest.json',JSON.stringify({count:5,source:['guided-art.js','guided-model.js'],assets:['jar-empty.svg','jar-seedlings.svg','jar-grown.svg','large-springtails.svg','large-woodlice.svg']},null,2));console.log('Exported 5 guided-game SVG assets.');

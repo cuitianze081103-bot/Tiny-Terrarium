@@ -35,16 +35,20 @@ body{overflow:hidden}#game{height:100dvh;min-height:0;--scene-scale:1}.topbar{he
 @keyframes shop-sprayer{50%{filter:drop-shadow(0 0 15px #d3ba6c55)}}@media(prefers-reduced-motion:reduce){.guided #sprayer.suggest{animation:none}.guided .object-button,.guided .specimen-card,.guided .guided-next{transition:none}}
 .guided .shop-arch{height:310px}.guided .bottle-wrap.target-ready:after{content:"";position:absolute;left:22%;right:22%;top:72%;height:12%;border:1px dashed #f1d48b;border-radius:50%;box-shadow:0 0 25px #f1d48b44;pointer-events:none}
 .guided #sprayer{filter:drop-shadow(3px 5px 4px #12271b45)}.guided #sprayer:after{bottom:24px;left:16%;right:11%;height:10px;filter:blur(3px)}
+
+/* Material handoff: current and upcoming objects occupy opposite sides. */
+.guided #plant-panel{left:973px;top:177px;width:260px;height:370px;padding:12px 10px}.guided #plant-panel .plant-choice{width:236px;height:113px}.guided #plant-panel .plant-object{width:94px;height:119px;left:0}.guided #plant-panel .plant-card{left:89px;width:143px;bottom:20px}.guided #creature-panel{left:50px;top:200px;width:340px}.guided #sprayer{left:1040px;top:290px;width:170px;height:205px}.guided .growth-dots{left:1051px;top:580px;gap:7px}.guided .growth-dot{width:8px;height:8px}.guided .upcoming{animation:material-arrives .6s ease-out both}.guided #sprayer.upcoming{animation:material-arrives .6s ease-out both}.guided #soil-panel,.guided #plant-panel,.guided #creature-panel{transition:box-shadow .25s}.guided .upcoming:not(#sprayer){box-shadow:inset 0 0 0 6px #2f302344,0 0 22px #d7be6a26,5px 14px 24px #13241a3d}.guided .plant-choice:hover .specimen-card{transform:translateY(-3px) rotate(0) scale(1.035)}
+@keyframes material-arrives{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}@media(prefers-reduced-motion:reduce){.guided .upcoming,.guided #sprayer.upcoming{animation:none}}
 </style></head><body class="guided" data-stage="soil"><main id="game" aria-label="Step by step terrarium game">
 <div class="room-light" aria-hidden="true"></div><div class="window window-one" aria-hidden="true"></div><div class="window window-two" aria-hidden="true"></div>
 <header class="topbar"><div class="shop-brand"><div class="seal" id="seal" aria-hidden="true"></div><span>TINY TERRARIUM</span></div><div class="utilities"><button id="undo" class="round-button" aria-label="Undo last action"></button><button id="reset" class="round-button" aria-label="Start a new terrarium"></button></div></header>
-<section class="workshop" aria-label="Greenhouse workbench"><div class="shop-arch" aria-hidden="true"></div><div class="stage-heading"><span id="stage-number" aria-hidden="true"></span><h1 id="stage-title"></h1></div><div id="step-track" class="step-track" aria-hidden="true"></div>
+<section class="workshop" aria-label="Greenhouse workbench"><div class="shop-arch" aria-hidden="true"></div>
 <aside id="plant-panel" class="plant-cabinet" aria-label="Plant selection" hidden><div class="cabinet-crown"></div><div id="plant-shelf" class="plant-shelf"></div><div class="cabinet-feet"></div></aside>
 <section class="bottle-station" aria-label="Terrarium"><div class="lamps" id="lamps" aria-hidden="true"></div><div class="light-cone" aria-hidden="true"></div><div class="jar-halo" aria-hidden="true"></div><div class="bottle-wrap"><div id="bottle" class="bottle"></div><div id="drop-targets" class="drop-targets"></div></div><div class="bottle-coaster" aria-hidden="true"></div></section>
 <aside id="creature-panel" class="guided-creatures" aria-label="Creature selection" hidden><div id="creature-boxes" class="creature-boxes"></div><div class="small-shelf" aria-hidden="true"></div></aside>
 <button id="sprayer" class="sprayer object-button" aria-label="Water your terrarium and grow plants" hidden></button>
 <section id="soil-panel" class="soil-drawer" aria-label="Soil selection"><div id="trowel" class="trowel" aria-hidden="true"></div><div id="soils" class="soils" role="group" aria-label="Choose soil"></div></section>
-<button id="next" class="guided-next" hidden><span id="next-label"></span><span id="next-icon" aria-hidden="true"></span></button><div id="growth-dots" class="growth-dots" aria-hidden="true" hidden></div>
+<div id="growth-dots" class="growth-dots" aria-hidden="true" hidden></div>
 </section><div class="bench-edge" aria-hidden="true"></div><div class="floor" aria-hidden="true"></div><div id="carried" class="carried" aria-hidden="true"></div><div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
 <dialog id="reset-dialog" aria-label="Start a new terrarium?"><div id="reset-picture" class="reset-picture"></div><div class="dialog-actions"><button id="cancel-reset" class="round-button" aria-label="Keep terrarium"></button><button id="confirm-reset" class="round-button" aria-label="Confirm reset"></button></div></dialog>
 </main><script type="module">// All ecological rules live here. Rendering never changes simulation state.
@@ -180,12 +184,12 @@ function jar(s,{preview=null,soilFlight=false,water=false,celebrate=false}={}){
 }
 
 const newGarden=()=>({...newWorld(),stage:'soil',light:50,sprays:0});
+function gardenPanels(s){return {soil:s.stage==='soil',plants:(s.stage==='soil'&&Boolean(s.soil))||s.stage==='plants',creatures:(s.stage==='plants'&&s.plants.some(Boolean))||s.stage==='creatures',water:(s.stage==='creatures'&&s.creatures.length>0)||s.stage==='care'};}
 function gardenAct(s,a){
- if(s.stage==='soil'&&a.kind==='soil'&&SOILS[a.type]){s.soil=a.type;s.stage='plants';return true;}
+ if(a.kind==='pickup'){const panels=gardenPanels(s),key={soil:'soil',plant:'plants',creature:'creatures',water:'water'}[a.type];if(!panels[key])return false;s.stage={soil:'soil',plant:'plants',creature:'creatures',water:'care'}[a.type];return true;}
+ if(s.stage==='soil'&&a.kind==='soil'&&SOILS[a.type]){s.soil=a.type;return true;}
  if(s.stage==='plants'&&a.kind==='plant'&&SPECIES[a.type]&&Number.isInteger(a.slot)&&a.slot>=0&&a.slot<PLANT_BED.length){s.plants[a.slot]={species:a.type,health:90,growth:.68,stressDays:0};return true;}
- if(a.kind==='next'&&s.stage==='plants'&&s.plants.some(Boolean)){s.stage='creatures';return true;}
  if(s.stage==='creatures'&&a.kind==='creature'&&CREATURES[a.type]){if(!s.creatures.includes(a.type))s.creatures.push(a.type);return true;}
- if(a.kind==='next'&&s.stage==='creatures'&&s.creatures.length){s.stage='care';return true;}
  if(s.stage==='care'&&a.kind==='water'){s.sprays++;s.moisture=Math.min(85,s.moisture+4);s.plants.forEach(p=>{if(p){p.growth=Math.min(1.45,p.growth+.085);p.health=Math.min(100,p.health+2);}});return true;}
  return false;
 }
@@ -202,7 +206,7 @@ function gardenJar(s,options={}){
 const q=s=>document.querySelector(s);
 let garden=newGarden(),selected=null,history=[],drag=null,suppress=false,mistTimer=null;
 const copy=s=>JSON.parse(JSON.stringify(s));
-q('#seal').innerHTML=glyph('leaf');q('#undo').innerHTML=glyph('undo');q('#reset').innerHTML=glyph('reset');q('#next-icon').innerHTML=glyph('check');q('#cancel-reset').innerHTML=glyph('close');q('#confirm-reset').innerHTML=glyph('check');q('#trowel').innerHTML=trowel();q('#sprayer').innerHTML=sprayer();q('#lamps').innerHTML=pendant(50);
+q('#seal').innerHTML=glyph('leaf');q('#undo').innerHTML=glyph('undo');q('#reset').innerHTML=glyph('reset');q('#cancel-reset').innerHTML=glyph('close');q('#confirm-reset').innerHTML=glyph('check');q('#trowel').innerHTML=trowel();q('#sprayer').innerHTML=sprayer();q('#lamps').innerHTML=pendant(50);
 q('#plant-shelf').innerHTML=Object.entries(SPECIES).map(([type,p])=>`<div class="plant-row"><button class="plant-choice object-button" data-kind="plant" data-type="${type}" aria-label="Pick up ${p.name}" aria-pressed="false"><span class="plant-object">${pottedPlant(type)}</span><span class="specimen-card plant-card">${specimenCard(type)}</span></button></div>`).join('');
 q('#soils').innerHTML=Object.entries(SOILS).map(([type,s])=>`<button class="soil-choice object-button" data-kind="soil" data-type="${type}" aria-label="Scoop ${s.name}" aria-pressed="false"><span class="soil-object">${soilTray(type)}</span><span class="specimen-card soil-card">${specimenCard(type)}</span></button>`).join('');
 q('#creature-boxes').innerHTML=Object.entries(CREATURES).map(([type,c])=>`<button class="creature-box object-button" data-kind="creature" data-type="${type}" aria-label="Pick up ${c.name}" aria-pressed="false"><span class="insect-object">${bugBox(type)}</span><span class="specimen-card insect-card">${specimenCard(type)}</span></button>`).join('');
@@ -211,11 +215,8 @@ function fit(){q('#game').style.setProperty('--scene-scale',Math.max(.25,Math.mi
 function render(mist=false){
  document.body.dataset.stage=garden.stage;
  q('#bottle').innerHTML=gardenJar(garden,{water:mist,preview:selected?.kind==='plant'?selected:null});
- q('#plant-panel').hidden=garden.stage!=='plants';q('#soil-panel').hidden=garden.stage!=='soil';q('#creature-panel').hidden=garden.stage!=='creatures';q('#sprayer').hidden=garden.stage!=='care';
- const titles={soil:'Add soil',plants:'Plant your terrarium',creatures:'Add tiny creatures',care:'Water & grow'};
- q('#stage-title').textContent=titles[garden.stage];const stepIndex=['soil','plants','creatures','care'].indexOf(garden.stage);q('#stage-number').textContent=`0${stepIndex+1} / 04`;q('#step-track').innerHTML=Array.from({length:4},(_,i)=>`<span class="${i<=stepIndex?'passed':''} ${i===stepIndex?'current':''}"></span>`).join('');
- q('#next').hidden=!['plants','creatures'].includes(garden.stage);q('#next').disabled=garden.stage==='plants'?!garden.plants.some(Boolean):!garden.creatures.length;
- q('#next-label').textContent=garden.stage==='plants'?'Finish planting':'Finish setup';
+ const panels=gardenPanels(garden);q('#plant-panel').hidden=!panels.plants;q('#soil-panel').hidden=!panels.soil;q('#creature-panel').hidden=!panels.creatures;q('#sprayer').hidden=!panels.water;
+ q('#plant-panel').classList.toggle('upcoming',garden.stage==='soil'&&panels.plants);q('#creature-panel').classList.toggle('upcoming',garden.stage==='plants'&&panels.creatures);q('#sprayer').classList.toggle('upcoming',garden.stage==='creatures'&&panels.water);
  q('#drop-targets').innerHTML=`<button class="jar-target" aria-label="${garden.stage==='care'?'Water terrarium':selected?'Place selected object into terrarium':'Terrarium'}"></button>`+(selected?.kind==='plant'?PLANT_BED.map((bed,i)=>`<button class="plant-slot" style="--x:${bed.x/5.6}%;--y:${bed.y/4.4}%" data-slot="${i}" aria-label="${garden.plants[i]?'Replace':'Plant in'} ${bed.name} position">${glyph(garden.plants[i]?'undo':'leaf')}</button>`).join(''):'');
  q('.bottle-wrap').classList.toggle('target-ready',Boolean(selected));
  document.querySelectorAll('[data-kind]').forEach(b=>{b.setAttribute('aria-pressed',String(selected?.kind===b.dataset.kind&&selected?.type===b.dataset.type));b.classList.toggle('added',b.dataset.kind==='creature'&&garden.creatures.includes(b.dataset.type));b.classList.toggle('suggest',garden.stage==='soil');});
@@ -223,17 +224,18 @@ function render(mist=false){
  q('#growth-dots').innerHTML=Array.from({length:10},(_,i)=>`<i class="growth-dot ${i<garden.sprays?'filled':''}"></i>`).join('');q('#growth-dots').hidden=garden.stage!=='care';
 }
 function commit(action){const before=copy(garden);if(!gardenAct(garden,action))return false;history.push(before);if(history.length>80)history.shift();selected=null;clearTimeout(mistTimer);render(action.kind==='water');if(before.stage!==garden.stage){const target=garden.stage==='plants'?q('#plant-panel button'):garden.stage==='creatures'?q('#creature-panel button'):q('#sprayer');target?.focus({preventScroll:true});}if(action.kind==='water'){mistTimer=setTimeout(()=>render(),1100);announce('Water sprayed. The plants have grown.');}else announce(`Step: ${garden.stage}.`);return true;}
+function begin(item,force=false){const before=copy(garden);if(!gardenAct(garden,{kind:'pickup',type:item.kind}))return false;if(before.stage!==garden.stage){history.push(before);if(history.length>80)history.shift();}selected=!force&&selected?.kind===item.kind&&selected?.type===item.type?null:item;clearTimeout(mistTimer);render();announce(selected?`${item.kind} selected. Place it into the jar.`:'Object put down.');return true;}
 function apply(slot){if(garden.stage==='care'){commit({kind:'water'});return;}if(!selected)return;if(selected.kind==='plant'){slot=slot??garden.plants.findIndex(p=>!p);if(slot<0)slot=1;}commit({...selected,slot});}
 document.addEventListener('click',e=>{if(suppress){suppress=false;return;}const b=e.target.closest('button');if(!b||b.disabled)return;
- if(b.dataset.kind){selected=selected?.kind===b.dataset.kind&&selected?.type===b.dataset.type?null:{kind:b.dataset.kind,type:b.dataset.type};render();return;}
+ if(b.dataset.kind){begin({kind:b.dataset.kind,type:b.dataset.type});return;}
  if(b.dataset.slot!==undefined){apply(Number(b.dataset.slot));return;}if(b.classList.contains('jar-target')){apply();return;}
- if(b.id==='sprayer'){commit({kind:'water'});return;}if(b.id==='next'){commit({kind:'next'});return;}
+ if(b.id==='sprayer'){begin({kind:'water'});return;}
  if(b.id==='undo'&&history.length){garden=history.pop();selected=null;clearTimeout(mistTimer);render();return;}
  if(b.id==='reset'){q('#reset-picture').innerHTML=gardenJar(newGarden());q('#reset-dialog').showModal();return;}
  if(b.id==='cancel-reset'){q('#reset-dialog').close();return;}if(b.id==='confirm-reset'){q('#reset-dialog').close();clearTimeout(mistTimer);garden=newGarden();history=[];selected=null;render();}
 });
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-kind],#sprayer');if(!b||b.disabled||e.button!==0)return;drag={x:e.clientX,y:e.clientY,item:b.id==='sprayer'?{kind:'water'}:{kind:b.dataset.kind,type:b.dataset.type},active:false};});
-document.addEventListener('pointermove',e=>{if(!drag)return;if(!drag.active&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>10){drag.active=true;selected=drag.item;render();}if(drag.active){e.preventDefault();q('#carried').innerHTML=drag.item.kind==='water'?sprayer():drag.item.kind==='soil'?trowel(drag.item.type):drag.item.kind==='plant'?pottedPlant(drag.item.type):bugBox(drag.item.type);q('#carried').classList.add('active');q('#carried').style.left=`${e.clientX}px`;q('#carried').style.top=`${e.clientY}px`;}},{passive:false});
+document.addEventListener('pointermove',e=>{if(!drag)return;if(!drag.active&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>10){if(!begin(drag.item,true)){drag=null;return;}drag.active=true;}if(drag.active){e.preventDefault();q('#carried').innerHTML=drag.item.kind==='water'?sprayer():drag.item.kind==='soil'?trowel(drag.item.type):drag.item.kind==='plant'?pottedPlant(drag.item.type):bugBox(drag.item.type);q('#carried').classList.add('active');q('#carried').style.left=`${e.clientX}px`;q('#carried').style.top=`${e.clientY}px`;}},{passive:false});
 document.addEventListener('pointerup',e=>{if(drag?.active){const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.plant-slot,.jar-target');if(target)apply(target.dataset.slot===undefined?undefined:Number(target.dataset.slot));suppress=true;setTimeout(()=>suppress=false,0);}drag=null;q('#carried').classList.remove('active');});
 document.addEventListener('pointercancel',()=>{drag=null;q('#carried').classList.remove('active');});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){selected=null;render();}if(e.key==='z'&&(e.ctrlKey||e.metaKey)&&!q('dialog[open]')){e.preventDefault();q('#undo').click();}});
